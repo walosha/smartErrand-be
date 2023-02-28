@@ -5,6 +5,7 @@ import { AppService } from "./app.service";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { UserModule } from "./user/user.module";
 import { GraphQLDateTime } from "graphql-iso-date";
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { GraphQLDateTime } from "graphql-iso-date";
       },
     }),
     UserModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
