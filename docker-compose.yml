@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  # node_app:
+  #   build: .
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - app-network
+  #   volumes:
+  #     - ./src/:/app/src/
+  #     - .env/:/app/.env
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - node_db
+  node_db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - .env/:/app/.env
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=password
+    networks:
+      - app-network
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
+volumes:
+  dbdata:
