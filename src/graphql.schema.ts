@@ -8,15 +8,20 @@
 /* tslint:disable */
 /* eslint-disable */
 export class CreateUserInput {
-    exampleField?: Nullable<number>;
+    email?: Nullable<string>;
+    phone?: Nullable<string>;
+    firstname?: Nullable<string>;
+    lastname?: Nullable<string>;
+    password?: Nullable<string>;
 }
 
 export class UpdateUserInput {
-    id: number;
+    firstname?: Nullable<string>;
+    lastname?: Nullable<string>;
 }
 
 export class User {
-    exampleField?: Nullable<number>;
+    id?: Nullable<number>;
 }
 
 export abstract class IQuery {

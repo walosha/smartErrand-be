@@ -3,23 +3,23 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
-import { UserModule } from "./user/user.module";
-import { GraphQLDateTime } from "graphql-iso-date";
-import { UsersModule } from './users/users.module';
+import { UsersModule } from "./users/users.module";
+// import { GraphQLDateTime } from "graphql-iso-date";
+import { ApolloDriver } from "@nestjs/apollo";
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
       playground: false,
+      driver: ApolloDriver,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       typePaths: ["./**/*.graphql"],
-      resolvers: { DateTime: GraphQLDateTime },
+      // resolvers: { DateTime: GraphQLDateTime },
       subscriptions: {
         "graphql-ws": true,
         "subscriptions-transport-ws": true,
       },
     }),
-    UserModule,
     UsersModule,
   ],
   controllers: [AppController],

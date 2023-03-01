@@ -1,15 +1,18 @@
 type User {
-  # Example field (placeholder)
-  exampleField: Int
+  id: Int
 }
 
 input CreateUserInput {
-  # Example field (placeholder)
-  exampleField: Int
+  email: String
+  phone: String
+  firstname: String
+  lastname: String
+  password: String
 }
 
 input UpdateUserInput {
-  id: Int!
+  firstname: String
+  lastname: String
 }
 
 type Query {
