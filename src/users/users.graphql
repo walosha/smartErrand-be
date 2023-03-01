@@ -1,5 +1,5 @@
 type User {
-  id: Int
+  id: String
 }
 
 input CreateUserInput {
@@ -8,6 +8,7 @@ input CreateUserInput {
   firstname: String
   lastname: String
   password: String
+  referralCode: String
 }
 
 input UpdateUserInput {
@@ -17,11 +18,11 @@ input UpdateUserInput {
 
 type Query {
   users: [User]!
-  user(id: Int!): User
+  user(id: String!): User
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User
+  removeUser(id: String!): User
 }
