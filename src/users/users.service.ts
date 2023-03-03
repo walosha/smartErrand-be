@@ -1,45 +1,31 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Prisma } from ".prisma/client";
 import { generate } from "referral-codes";
 import { PrismaService } from "../../prisma/prisma.service";
+import { UserCreateInput } from "src/@generated/user/user-create.input";
+import { UserUpdateInput } from "src/@generated/user/user-update.input";
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createUserInput: Prisma.UserCreateInput) {
+  async checkUserExists(
+    phoneInput: Prisma.UserWhereInput,
+    emailInput: Prisma.UserWhereInput
+  ) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        OR: [phoneInput, emailInput],
+      },
+    });
+    return !!user;
+  }
+
+  async create(createUserInput: UserCreateInput) {
     const referralCode = generate({
       length: 8,
       prefix: `${createUserInput.firstname}-`,
     })[0];
-
-    const user = await this.prisma.user.findFirst({
-      where: {
-        OR: [
-          {
-            phone: {
-              contains: createUserInput.phone,
-              mode: "insensitive",
-            },
-          },
-          {
-            email: {
-              contains: createUserInput.email,
-              mode: "insensitive",
-            },
-          },
-        ],
-      },
-    });
-
-    if (user)
-      throw new HttpException(
-        {
-          message: "Email or Phone Number  already exists",
-        },
-        HttpStatus.CONFLICT
-      );
-
     return await this.prisma.user.create({
       data: { referralCode, ...createUserInput },
     });
@@ -53,7 +39,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  async update(id: string, updateUserInput: Prisma.UserUpdateInput) {
+  async update(id: string, updateUserInput: UserUpdateInput) {
     return await this.prisma.user.update({
       data: updateUserInput,
       where: { id },
