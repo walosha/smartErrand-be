@@ -13,13 +13,15 @@ export class UsersResolver {
   }
 
   @Query("users")
-  async findAll() {
-    return this.usersService.findAll();
+  async findAll(@Args() args) {
+    const res = await this.usersService.findAll(args);
+    console.log({ res });
+    return res;
   }
 
   @Query("user")
   async findOne(@Args("id") id: number) {
-    return await this.usersService.findOne(id);
+    return this.usersService.findOne(id);
   }
 
   @Mutation("updateUser")
@@ -32,6 +34,6 @@ export class UsersResolver {
 
   @Mutation("removeUser")
   async remove(@Args("id") id: number) {
-    return await this.usersService.remove(id);
+    return this.usersService.remove(id);
   }
 }

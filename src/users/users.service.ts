@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma } from ".prisma/client";
-import { PrismaService } from "../../prisma/prisma.service";
 import { generate } from "referral-codes";
+import { PrismaService } from "../../prisma/prisma.service";
+
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
@@ -30,6 +31,7 @@ export class UsersService {
         ],
       },
     });
+
     if (user)
       throw new HttpException(
         {
@@ -43,8 +45,8 @@ export class UsersService {
     });
   }
 
-  async findAll() {
-    return await this.prisma.user.findMany();
+  async findAll(args) {
+    return await this.prisma.user.findMany<Prisma.UserFindManyArgs>(args);
   }
 
   findOne(id: number) {
