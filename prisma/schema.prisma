@@ -24,8 +24,10 @@ enum Role {
 }
 
 model User {
+  ///  
+  ///   @Validator.IsUUID('4', { message: 'Invalid UUID' })
   id             String   @id @default(uuid())
-  /// @IsString()
+  ///  @Validator.IsString()
   /// @Validator.MinLength(11)
   phone          String   @unique
   referralCode   String   @unique

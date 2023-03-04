@@ -1,9 +1,12 @@
 import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
 import { HttpException, HttpStatus } from "@nestjs/common";
-import { UserUpdateInput } from "src/@generated/user/user-update.input";
 import { UserCreateInput } from "src/@generated/user/user-create.input";
 import { FindManyUserArgs } from "src/@generated/user/find-many-user.args";
+import { User } from "src/graphql.schema";
+import { FindUniqueUserArgs } from "src/@generated/user/find-unique-user.args";
+import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
+import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
 
 @Resolver("User")
 export class UsersResolver {
@@ -42,20 +45,17 @@ export class UsersResolver {
   }
 
   @Query("user")
-  async findOne(@Args("id") id: number) {
-    return this.usersService.findOne(id);
+  async findOne(@Args() args: FindUniqueUserArgs): Promise<User> {
+    return await this.usersService.findOne(args);
   }
 
   @Mutation("updateUser")
-  async update(
-    @Args("id") id: string,
-    @Args("updateUserInput") updateUserInput: UserUpdateInput
-  ) {
-    return await this.usersService.update(id, updateUserInput);
+  async update(@Args() args: UpdateOneUserArgs) {
+    return await this.usersService.update(args);
   }
 
   @Mutation("removeUser")
-  async remove(@Args("id") id: number) {
-    return this.usersService.remove(id);
+  async remove(@Args() args: DeleteOneUserArgs) {
+    return this.usersService.remove(args);
   }
 }

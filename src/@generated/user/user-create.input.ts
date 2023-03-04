@@ -7,9 +7,11 @@ import { Role } from '../prisma/role.enum';
 export class UserCreateInput {
 
     @Field(() => String, {nullable:true})
+    @Validator.IsUUID('4', { message: 'Invalid UUID' })
     id?: string;
 
     @Field(() => String, {nullable:false})
+    @Validator.IsString()
     @Validator.MinLength(11)
     phone!: string;
 

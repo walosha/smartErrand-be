@@ -48,6 +48,10 @@ export class StringNullableFilter {
     not?: Nullable<string>;
 }
 
+export class UserWhereUniqueInput {
+    id: string;
+}
+
 export class DateTimeNullableFilter {
     equals?: Nullable<DateTime>;
     in?: Nullable<DateTime[]>;
@@ -95,6 +99,7 @@ export class CreateUserInput {
 export class UpdateUserInput {
     firstname?: Nullable<string>;
     lastname?: Nullable<string>;
+    phone?: Nullable<string>;
 }
 
 export class User {
@@ -109,15 +114,15 @@ export class User {
 export abstract class IQuery {
     abstract users(where?: Nullable<UserWhereInput>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>): User[] | Promise<User[]>;
 
-    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
+    abstract user(where?: Nullable<UserWhereUniqueInput>): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
-    abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
+    abstract updateUser(where: UserWhereUniqueInput, data: UpdateUserInput): User | Promise<User>;
 
-    abstract removeUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+    abstract removeUser(where: UserWhereUniqueInput): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export type DateTime = any;

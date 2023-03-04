@@ -44,6 +44,10 @@ input StringNullableFilter {
   not: String
 }
 
+input UserWhereUniqueInput {
+  id: String!
+}
+
 enum SortOrder {
   Asc
   Desc
@@ -96,6 +100,7 @@ input CreateUserInput {
 input UpdateUserInput {
   firstname: String
   lastname: String
+  phone: String
 }
 
 type Query {
@@ -106,11 +111,11 @@ type Query {
     take: Float = 10
   ): [User!]!
 
-  user(id: String!): User
+  user(where: UserWhereUniqueInput): User
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: String!): User
+  updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User!
+  removeUser(where: UserWhereUniqueInput!): User
 }

@@ -1,9 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma } from ".prisma/client";
 import { generate } from "referral-codes";
 import { PrismaService } from "../../prisma/prisma.service";
 import { UserCreateInput } from "src/@generated/user/user-create.input";
-import { UserUpdateInput } from "src/@generated/user/user-update.input";
+import { User } from "src/graphql.schema";
+import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
+import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
 
 @Injectable()
 export class UsersService {
@@ -35,18 +37,26 @@ export class UsersService {
     return await this.prisma.user.findMany<Prisma.UserFindManyArgs>(args);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne<T extends Prisma.UserFindUniqueArgs>(
+    args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>
+  ): Promise<User> {
+    return await this.prisma.user.findUnique(args);
   }
 
-  async update(id: string, updateUserInput: UserUpdateInput) {
-    return await this.prisma.user.update({
-      data: updateUserInput,
-      where: { id },
-    });
+  async update(updateUserInput: UpdateOneUserArgs) {
+    return await this.prisma.user.update(updateUserInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(args: DeleteOneUserArgs) {
+    try {
+      await this.prisma.user.delete(args);
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: "Resource already deleted",
+        },
+        HttpStatus.NO_CONTENT
+      );
+    }
   }
 }
