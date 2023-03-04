@@ -11,6 +11,8 @@ import { NigeriaPhoneNumberValidator } from "./utils/nigeria-phone-number.valida
 @Module({
   imports: [
     GraphQLModule.forRoot({
+      sortSchema: true,
+      context: ({ req }) => ({ headers: req.headers }),
       formatError: (error) => {
         const graphQLFormattedError = {
           message: error?.extensions?.response?.message || error.message,

@@ -4,6 +4,7 @@ import { generate } from "referral-codes";
 import { PrismaService } from "../../prisma/prisma.service";
 import { UserCreateInput } from "src/@generated/user/user-create.input";
 import { User } from "src/graphql.schema";
+import jwt from "jsonwebtoken";
 import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
 import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
 
@@ -22,6 +23,9 @@ export class UsersService {
     });
     return !!user;
   }
+  createToken({ id, email, phone }: User) {
+    return jwt.sign({ id, email, phone }, "secret");
+  }
 
   async create(createUserInput: UserCreateInput) {
     const referralCode = generate({
@@ -31,6 +35,10 @@ export class UsersService {
     return await this.prisma.user.create({
       data: { referralCode, ...createUserInput },
     });
+  }
+
+  async signin(args) {
+    return await this.prisma.user.findMany<Prisma.UserFindManyArgs>(args);
   }
 
   async findAll(args) {

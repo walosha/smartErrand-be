@@ -103,6 +103,11 @@ input UpdateUserInput {
   phone: String
 }
 
+input signupInput {
+  email: String
+  password: String
+}
+
 type Query {
   users(
     where: UserWhereInput
@@ -112,10 +117,12 @@ type Query {
   ): [User!]!
 
   user(where: UserWhereUniqueInput): User
+  me: User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  signin(createUserInput: CreateUserInput!): User!
+  signup(createUserInput: CreateUserInput!): User!
   updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User
 }

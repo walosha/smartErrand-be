@@ -102,6 +102,11 @@ export class UpdateUserInput {
     phone?: Nullable<string>;
 }
 
+export class SignupInput {
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+}
+
 export class User {
     id?: Nullable<string>;
     firstname?: Nullable<string>;
@@ -115,10 +120,14 @@ export abstract class IQuery {
     abstract users(where?: Nullable<UserWhereInput>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>): User[] | Promise<User[]>;
 
     abstract user(where?: Nullable<UserWhereUniqueInput>): Nullable<User> | Promise<Nullable<User>>;
+
+    abstract me(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {
-    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
+    abstract signin(createUserInput: CreateUserInput): User | Promise<User>;
+
+    abstract signup(createUserInput: CreateUserInput): User | Promise<User>;
 
     abstract updateUser(where: UserWhereUniqueInput, data: UpdateUserInput): User | Promise<User>;
 
