@@ -1,27 +1,122 @@
+scalar DateTime
+
 type User {
-  id: Int
+  id: String
+  firstname: String
+  lastname: String
+  email: String
+  phone: String
+  referralCode: String
 }
 
-input CreateUserInput {
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: String
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: String
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTime
+}
+
+input UserWhereInput {
+  id: StringFilter
   email: String
   phone: String
   firstname: String
   lastname: String
-  password: String
+  from: StringNullableFilter
+  to: StringNullableFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input UserOrderByInput {
+  id: SortOrder
+  firstname: SortOrder
+  lastname: SortOrder
+  email: SortOrder
+  phone: SortOrder
+  from: SortOrder
+  to: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input UpdateUserInput {
   firstname: String
   lastname: String
+  phone: String
+}
+
+input signupInput {
+  email: String
+  password: String
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
 }
 
 type Query {
-  users: [User]!
-  user(id: Int!): User
+  users(
+    where: UserWhereInput
+    orderBy: [UserOrderByInput!]
+    skip: Float
+    take: Float = 10
+  ): [User!]!
+
+  user(where: UserWhereUniqueInput): User
+  me: User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User
+  updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User!
+  removeUser(where: UserWhereUniqueInput!): User
 }

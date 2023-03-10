@@ -1,0 +1,28 @@
+type User {
+  id: String
+  firstname: String
+  lastname: String
+  email: String
+  phone: String
+  referralCode: String
+  role: [String]
+}
+
+input SignUserInput {
+  emailOrPassword: String!
+  password: String!
+}
+
+input CreateUserInput {
+  email: String
+  phone: String
+  firstname: String
+  lastname: String
+  password: String
+  referralCode: String
+}
+
+type Mutation {
+  signin(loginUserInput: SignUserInput!): LoginResponse!
+  signup(createUserInput: CreateUserInput!): User!
+}

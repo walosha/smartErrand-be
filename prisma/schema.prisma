@@ -13,7 +13,7 @@ generator client {
 
 generator nestgraphql {
   provider               = "node node_modules/prisma-nestjs-graphql"
-  output                 = "../src/@generated/prisma-nestjs-graphql"
+  output                 = "../src/@generated"
   fields_Validator_from  = "class-validator"
   fields_Validator_input = true
 }
@@ -24,26 +24,29 @@ enum Role {
 }
 
 model User {
-  id             String       @id @default(uuid())
-  phone          String       @unique
-  referralCode   String       @unique
+  id             String   @id @default(uuid())
+  ///  @Validator.IsString()
+  /// @Validator.MinLength(11)
+  phone          String   @unique
+  referralCode   String   @unique
   /// @Validator.IsEmail()
-  email          String       @unique
+  email          String   @unique
   /// @Validator.MinLength(3)
   firstname      String
   /// @Validator.MinLength(3)
   lastname       String
+  /// @Validator.MinLength(6)
   password       String
-  role           Role         @default(USER)
-  isAdmin        Boolean      @default(false)
-  emailConfirmed Boolean      @default(false)
-  phoneConfirmed Boolean      @default(false)
-  profile        UserProfile?
-  updatedAt      DateTime     @default(now())
-  createdAt      DateTime     @default(now())
+  role           String[]
+  isAdmin        Boolean  @default(false)
+  emailConfirmed Boolean  @default(false)
+  phoneConfirmed Boolean  @default(false)
+  // profile        UserProfile?
+  updatedAt      DateTime @default(now())
+  createdAt      DateTime @default(now())
 }
 
-model UserProfile {
-  user User   @relation(fields: [id], references: [id])
-  id   String @unique
-}
+// model UserProfile {
+//   user User   @relation(fields: [id], references: [id])
+//   id   String @unique
+// }

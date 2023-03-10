@@ -6,10 +6,25 @@ import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { UsersModule } from "./users/users.module";
 // import { GraphQLDateTime } from "graphql-iso-date";
 import { ApolloDriver } from "@nestjs/apollo";
+import { NigeriaPhoneNumberValidator } from "./utils/nigeria-phone-number.validator";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
+      sortSchema: true,
+      context: ({ req }) => ({ headers: req.headers }),
+      formatError: (error) => {
+        const graphQLFormattedError = {
+          message: error?.extensions?.response?.message || error.message,
+          code:
+            error.extensions?.response?.statusCode ||
+            error.extensions?.code ||
+            "SERVER_ERROR",
+          name: error.extensions?.exception?.name || error.name,
+        };
+        return graphQLFormattedError;
+      },
       playground: false,
       driver: ApolloDriver,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
@@ -21,8 +36,10 @@ import { ApolloDriver } from "@nestjs/apollo";
       },
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, NigeriaPhoneNumberValidator],
+  exports: [NigeriaPhoneNumberValidator],
 })
 export class AppModule {}
