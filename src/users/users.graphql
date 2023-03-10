@@ -88,15 +88,6 @@ input UserOrderByInput {
   updatedAt: SortOrder
 }
 
-input CreateUserInput {
-  email: String
-  phone: String
-  firstname: String
-  lastname: String
-  password: String
-  referralCode: String
-}
-
 input UpdateUserInput {
   firstname: String
   lastname: String
@@ -106,6 +97,11 @@ input UpdateUserInput {
 input signupInput {
   email: String
   password: String
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
 }
 
 type Query {
@@ -121,8 +117,6 @@ type Query {
 }
 
 type Mutation {
-  signin(createUserInput: CreateUserInput!): User!
-  signup(createUserInput: CreateUserInput!): User!
   updateUser(where: UserWhereUniqueInput!, data: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User
 }

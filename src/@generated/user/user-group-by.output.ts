@@ -1,6 +1,5 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
-import { Role } from '../prisma/role.enum';
 import { UserCountAggregate } from './user-count-aggregate.output';
 import { UserMinAggregate } from './user-min-aggregate.output';
 import { UserMaxAggregate } from './user-max-aggregate.output';
@@ -29,8 +28,8 @@ export class UserGroupBy {
     @Field(() => String, {nullable:false})
     password!: string;
 
-    @Field(() => Role, {nullable:false})
-    role!: keyof typeof Role;
+    @Field(() => [String], {nullable:true})
+    role?: Array<string>;
 
     @Field(() => Boolean, {nullable:false})
     isAdmin!: boolean;

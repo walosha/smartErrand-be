@@ -18,6 +18,20 @@ export enum SortOrder {
     Desc = "Desc"
 }
 
+export class SignUserInput {
+    emailOrPassword: string;
+    password: string;
+}
+
+export class CreateUserInput {
+    email?: Nullable<string>;
+    phone?: Nullable<string>;
+    firstname?: Nullable<string>;
+    lastname?: Nullable<string>;
+    password?: Nullable<string>;
+    referralCode?: Nullable<string>;
+}
+
 export class StringFilter {
     equals?: Nullable<string>;
     in?: Nullable<string[]>;
@@ -87,15 +101,6 @@ export class UserOrderByInput {
     updatedAt?: Nullable<SortOrder>;
 }
 
-export class CreateUserInput {
-    email?: Nullable<string>;
-    phone?: Nullable<string>;
-    firstname?: Nullable<string>;
-    lastname?: Nullable<string>;
-    password?: Nullable<string>;
-    referralCode?: Nullable<string>;
-}
-
 export class UpdateUserInput {
     firstname?: Nullable<string>;
     lastname?: Nullable<string>;
@@ -114,6 +119,22 @@ export class User {
     email?: Nullable<string>;
     phone?: Nullable<string>;
     referralCode?: Nullable<string>;
+    role?: Nullable<Nullable<string>[]>;
+}
+
+export abstract class IMutation {
+    abstract signin(loginUserInput: SignUserInput): LoginResponse | Promise<LoginResponse>;
+
+    abstract signup(createUserInput: CreateUserInput): User | Promise<User>;
+
+    abstract updateUser(where: UserWhereUniqueInput, data: UpdateUserInput): User | Promise<User>;
+
+    abstract removeUser(where: UserWhereUniqueInput): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export class LoginResponse {
+    access_token: string;
+    user: User;
 }
 
 export abstract class IQuery {
@@ -122,16 +143,6 @@ export abstract class IQuery {
     abstract user(where?: Nullable<UserWhereUniqueInput>): Nullable<User> | Promise<Nullable<User>>;
 
     abstract me(): Nullable<User> | Promise<Nullable<User>>;
-}
-
-export abstract class IMutation {
-    abstract signin(createUserInput: CreateUserInput): User | Promise<User>;
-
-    abstract signup(createUserInput: CreateUserInput): User | Promise<User>;
-
-    abstract updateUser(where: UserWhereUniqueInput, data: UpdateUserInput): User | Promise<User>;
-
-    abstract removeUser(where: UserWhereUniqueInput): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export type DateTime = any;

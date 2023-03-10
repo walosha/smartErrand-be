@@ -7,6 +7,7 @@ import { UsersModule } from "./users/users.module";
 // import { GraphQLDateTime } from "graphql-iso-date";
 import { ApolloDriver } from "@nestjs/apollo";
 import { NigeriaPhoneNumberValidator } from "./utils/nigeria-phone-number.validator";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { NigeriaPhoneNumberValidator } from "./utils/nigeria-phone-number.valida
       },
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, NigeriaPhoneNumberValidator],

@@ -1,28 +1,27 @@
 import { Resolver, Query, Mutation, Args, Context } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
-import { HttpException, HttpStatus, UseGuards } from "@nestjs/common";
-import { UserCreateInput } from "src/@generated/user/user-create.input";
+import { UseGuards } from "@nestjs/common";
 import { FindManyUserArgs } from "src/@generated/user/find-many-user.args";
 import { User } from "src/graphql.schema";
 import { FindUniqueUserArgs } from "src/@generated/user/find-unique-user.args";
 import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
 import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
-import { GqlAuthGuard } from "./guards/gql-auth.guard";
-import { Role } from "@prisma/client";
-import { Roles } from "./decorators/roles.decorator";
-// import { AuthGaurd } from "./guards/roles.guard";
+import { GqlAuthGuard } from "src/common/guards/gql-auth.guard";
 
 @Resolver("User")
+@UseGuards(GqlAuthGuard)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  // @Query()
-  // @UseGuards(new AuthGaurd())
-  // me(@Context("user") user: User) {
-  //   return user;
-  // }
+  @Query()
+  me(@Context() data: { user: User }) {
+    console.log(data.user);
+    return data.user;
+  }
 
   @Query("users")
+  // @UseGuards(RolesGuard)
+  // @Roles(Role.ADMIN)
   async findAll(@Args() args: FindManyUserArgs) {
     return await this.usersService.findAll(args);
   }
@@ -30,27 +29,6 @@ export class UsersResolver {
   @Query("user")
   async findOne(@Args() args: FindUniqueUserArgs): Promise<User> {
     return await this.usersService.findOne(args);
-  }
-
-  @Mutation("signin")
-  @UseGuards(GqlAuthGuard)
-  @Roles(Role.ADMIN)
-  async signin(@Args() args: UserCreateInput) {
-    const user = await this.usersService.checkUserExists(
-      {
-        phone: {
-          contains: args.phone,
-        },
-      },
-      {
-        phone: {
-          contains: args.email,
-        },
-      }
-    );
-
-    if (user) {
-    }
   }
 
   @Mutation("updateUser")
@@ -61,30 +39,5 @@ export class UsersResolver {
   @Mutation("removeUser")
   async remove(@Args() args: DeleteOneUserArgs) {
     return this.usersService.remove(args);
-  }
-
-  @Mutation("signup")
-  async create(@Args("createUserInput") createUserInput: UserCreateInput) {
-    const user = await this.usersService.checkUserExists(
-      {
-        phone: {
-          contains: createUserInput.phone,
-        },
-      },
-      {
-        phone: {
-          contains: createUserInput.email,
-        },
-      }
-    );
-
-    if (user)
-      throw new HttpException(
-        {
-          message: "Email or Phone Number  already exists",
-        },
-        HttpStatus.CONFLICT
-      );
-    return await this.usersService.create(createUserInput);
   }
 }

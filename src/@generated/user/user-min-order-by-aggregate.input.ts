@@ -27,9 +27,6 @@ export class UserMinOrderByAggregateInput {
     password?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    role?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     isAdmin?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

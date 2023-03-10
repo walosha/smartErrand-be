@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
-import { EnumRoleFilter } from '../prisma/enum-role-filter.input';
+import { StringNullableListFilter } from '../prisma/string-nullable-list-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
@@ -38,8 +38,8 @@ export class UserWhereInput {
     @Field(() => StringFilter, {nullable:true})
     password?: StringFilter;
 
-    @Field(() => EnumRoleFilter, {nullable:true})
-    role?: EnumRoleFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    role?: StringNullableListFilter;
 
     @Field(() => BoolFilter, {nullable:true})
     isAdmin?: BoolFilter;

@@ -1,13 +1,12 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
-import { Role } from '../prisma/role.enum';
+import { UserCreateroleInput } from './user-createrole.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
 
     @Field(() => String, {nullable:true})
-    @Validator.IsUUID('4', { message: 'Invalid UUID' })
     id?: string;
 
     @Field(() => String, {nullable:false})
@@ -34,8 +33,8 @@ export class UserUncheckedCreateInput {
     @Validator.MinLength(6)
     password!: string;
 
-    @Field(() => Role, {nullable:true})
-    role?: keyof typeof Role;
+    @Field(() => UserCreateroleInput, {nullable:true})
+    role?: UserCreateroleInput;
 
     @Field(() => Boolean, {nullable:true})
     isAdmin?: boolean;

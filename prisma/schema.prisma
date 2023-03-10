@@ -24,8 +24,6 @@ enum Role {
 }
 
 model User {
-  ///  
-  ///   @Validator.IsUUID('4', { message: 'Invalid UUID' })
   id             String   @id @default(uuid())
   ///  @Validator.IsString()
   /// @Validator.MinLength(11)
@@ -39,7 +37,7 @@ model User {
   lastname       String
   /// @Validator.MinLength(6)
   password       String
-  role           Role     @default(USER)
+  role           String[]
   isAdmin        Boolean  @default(false)
   emailConfirmed Boolean  @default(false)
   phoneConfirmed Boolean  @default(false)

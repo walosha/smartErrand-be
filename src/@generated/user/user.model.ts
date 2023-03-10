@@ -1,7 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
-import { Role } from '../prisma/role.enum';
 
 @ObjectType()
 export class User {
@@ -27,8 +26,8 @@ export class User {
     @Field(() => String, {nullable:false})
     password!: string;
 
-    @Field(() => Role, {nullable:false,defaultValue:'USER'})
-    role!: keyof typeof Role;
+    @Field(() => [String], {nullable:true})
+    role!: Array<string>;
 
     @Field(() => Boolean, {nullable:false,defaultValue:false})
     isAdmin!: boolean;

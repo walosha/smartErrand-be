@@ -6,7 +6,6 @@ import * as Validator from 'class-validator';
 export class UserWhereUniqueInput {
 
     @Field(() => String, {nullable:true})
-    @Validator.IsUUID('4', { message: 'Invalid UUID' })
     id?: string;
 
     @Field(() => String, {nullable:true})
