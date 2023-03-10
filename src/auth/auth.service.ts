@@ -23,7 +23,15 @@ export class AuthService {
     return user;
   }
 
-  createToken({ id, email, phone, firstname, lastname, referralCode }: User) {
+  createToken({
+    id,
+    email,
+    phone,
+    firstname,
+    lastname,
+    referralCode,
+    role,
+  }: User) {
     return this.jwtService.sign({
       id,
       email,
@@ -31,6 +39,7 @@ export class AuthService {
       firstname,
       lastname,
       referralCode,
+      role,
     });
   }
 

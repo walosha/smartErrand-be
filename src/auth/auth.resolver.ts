@@ -27,7 +27,8 @@ export class AuthResolver {
         HttpStatus.UNAUTHORIZED
       );
     if (user && valid) {
-      const { id, email, phone, firstname, lastname, referralCode } = user;
+      const { id, email, phone, firstname, lastname, referralCode, role } =
+        user;
       const access_token = this.authService.createToken({
         id,
         email,
@@ -35,6 +36,7 @@ export class AuthResolver {
         firstname,
         lastname,
         referralCode,
+        role,
       });
       delete user.password;
       return { user, access_token };

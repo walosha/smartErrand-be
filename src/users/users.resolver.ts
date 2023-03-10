@@ -7,6 +7,10 @@ import { FindUniqueUserArgs } from "src/@generated/user/find-unique-user.args";
 import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
 import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
 import { GqlAuthGuard } from "src/common/guards/gql-auth.guard";
+import { Roles } from "src/common/decorators/roles.decorator";
+import Role from "src/common/role/roles.enum";
+import { RolesGuard } from "src/common/guards/roles.guard";
+import { JwtAuthGuard } from "src/common/guards/jwt-auth.guard";
 
 @Resolver("User")
 @UseGuards(GqlAuthGuard)
@@ -15,13 +19,12 @@ export class UsersResolver {
 
   @Query()
   me(@Context() data: { user: User }) {
-    console.log(data.user);
     return data.user;
   }
 
   @Query("users")
-  // @UseGuards(RolesGuard)
-  // @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
   async findAll(@Args() args: FindManyUserArgs) {
     return await this.usersService.findAll(args);
   }
