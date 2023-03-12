@@ -2,12 +2,16 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pg_trgm, postgis(version: "2.1")]
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  binaryTargets   = "native"
+  previewFeatures = ["postgresqlExtensions"]
+
   // binaryTargets = ["native", "darwin", "linux-musl", "debian-openssl-1.1.x"]
 }
 
@@ -21,6 +25,8 @@ generator nestgraphql {
 enum Role {
   USER
   ADMIN
+  ERRAND
+  CLIENT
 }
 
 model User {
@@ -41,12 +47,75 @@ model User {
   isAdmin        Boolean  @default(false)
   emailConfirmed Boolean  @default(false)
   phoneConfirmed Boolean  @default(false)
-  // profile        UserProfile?
   updatedAt      DateTime @default(now())
   createdAt      DateTime @default(now())
+  errand         Errand?
+  client         Client?
 }
 
-// model UserProfile {
-//   user User   @relation(fields: [id], references: [id])
-//   id   String @unique
-// }
+model Location {
+  id        String                               @id @default(uuid())
+  // the geometry column itself
+  coords    Unsupported("geometry(Point, 4326)")
+  address   String?
+  errand    Errand?
+  client    Client?
+  createdAt DateTime                             @default(now())
+  updatedAt DateTime                             @updatedAt
+
+  // the index for that column
+  @@index([coords], name: "location_idx", type: Gist)
+}
+
+model Service {
+  id            String         @id @default(uuid())
+  errand        Errand         @relation(fields: [errandId], references: [id])
+  errandId      String
+  client        Client         @relation(fields: [clientId], references: [id])
+  clientId      String
+  startLocation Float
+  endLocation   Float
+  startTime     DateTime
+  endTime       DateTime
+  serviceReview ServiceReview?
+}
+
+enum RATING {
+  ZERO
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE  @map("5")
+}
+
+model ServiceReview {
+  id        String  @id @default(uuid())
+  User      String
+  service   Service @relation(fields: [serviceId], references: [id])
+  serviceId String  @unique
+  comments  String
+  Rating    RATING  @default(ZERO)
+  Photos    String
+}
+
+model Errand {
+  id          String    @id @default(uuid())
+  name        String
+  isAvailable Boolean   @default(true)
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @unique
+  location    Location  @relation(fields: [locationId], references: [id])
+  locationId  String    @unique
+  categories  Service[]
+}
+
+model Client {
+  id         String    @id @default(uuid())
+  name       String
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String    @unique
+  location   Location  @relation(fields: [locationId], references: [id])
+  locationId String    @unique
+  categories Service[]
+}

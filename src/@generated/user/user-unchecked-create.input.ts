@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { UserCreateroleInput } from './user-createrole.input';
+import { ErrandUncheckedCreateNestedOneWithoutUserInput } from '../errand/errand-unchecked-create-nested-one-without-user.input';
+import { ClientUncheckedCreateNestedOneWithoutUserInput } from '../client/client-unchecked-create-nested-one-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -50,4 +52,10 @@ export class UserUncheckedCreateInput {
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
+
+    @Field(() => ErrandUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    errand?: ErrandUncheckedCreateNestedOneWithoutUserInput;
+
+    @Field(() => ClientUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    client?: ClientUncheckedCreateNestedOneWithoutUserInput;
 }

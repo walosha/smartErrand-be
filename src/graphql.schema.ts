@@ -32,6 +32,14 @@ export class CreateUserInput {
     referralCode?: Nullable<string>;
 }
 
+export class CreateLocationInput {
+    address?: Nullable<string>;
+}
+
+export class UpdateLocationInput {
+    address: string;
+}
+
 export class StringFilter {
     equals?: Nullable<string>;
     in?: Nullable<string[]>;
@@ -127,22 +135,36 @@ export abstract class IMutation {
 
     abstract signup(createUserInput: CreateUserInput): User | Promise<User>;
 
+    abstract createLocation(createLocationInput: CreateLocationInput): Location | Promise<Location>;
+
+    abstract updateLocation(updateLocationInput: UpdateLocationInput): Location | Promise<Location>;
+
+    abstract removeLocation(id: number): Nullable<Location> | Promise<Nullable<Location>>;
+
     abstract updateUser(where: UserWhereUniqueInput, data: UpdateUserInput): User | Promise<User>;
 
     abstract removeUser(where: UserWhereUniqueInput): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export class LoginResponse {
-    access_token: string;
-    user: User;
+export class Location {
+    id?: Nullable<string>;
 }
 
 export abstract class IQuery {
+    abstract locations(): Nullable<Location>[] | Promise<Nullable<Location>[]>;
+
+    abstract location(id: number): Nullable<Location> | Promise<Nullable<Location>>;
+
     abstract users(where?: Nullable<UserWhereInput>, orderBy?: Nullable<UserOrderByInput[]>, skip?: Nullable<number>, take?: Nullable<number>): User[] | Promise<User[]>;
 
     abstract user(where?: Nullable<UserWhereUniqueInput>): Nullable<User> | Promise<Nullable<User>>;
 
     abstract me(): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export class LoginResponse {
+    access_token: string;
+    user: User;
 }
 
 export type DateTime = any;

@@ -2,13 +2,10 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma } from ".prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { User } from "src/graphql.schema";
-import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
 import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
-import { JwtService } from "@nestjs/jwt";
-
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+  constructor(private prisma: PrismaService) {}
 
   async findAll(args) {
     return await this.prisma.user.findMany<Prisma.UserFindManyArgs>(args);
@@ -20,7 +17,7 @@ export class UsersService {
     return await this.prisma.user.findUnique(args);
   }
 
-  async update(updateUserInput: UpdateOneUserArgs) {
+  async update(updateUserInput: Prisma.UserUpdateArgs) {
     return await this.prisma.user.update(updateUserInput);
   }
 

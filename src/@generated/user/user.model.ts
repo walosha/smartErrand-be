@@ -1,6 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
+import { Errand } from '../errand/errand.model';
+import { Client } from '../client/client.model';
 
 @ObjectType()
 export class User {
@@ -43,4 +45,10 @@ export class User {
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
+
+    @Field(() => Errand, {nullable:true})
+    errand?: Errand | null;
+
+    @Field(() => Client, {nullable:true})
+    client?: Client | null;
 }

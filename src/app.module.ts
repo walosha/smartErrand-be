@@ -8,6 +8,7 @@ import { UsersModule } from "./users/users.module";
 import { ApolloDriver } from "@nestjs/apollo";
 import { NigeriaPhoneNumberValidator } from "./utils/nigeria-phone-number.validator";
 import { AuthModule } from "./auth/auth.module";
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AuthModule } from "./auth/auth.module";
     }),
     UsersModule,
     AuthModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService, NigeriaPhoneNumberValidator],

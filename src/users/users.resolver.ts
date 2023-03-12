@@ -4,13 +4,13 @@ import { UseGuards } from "@nestjs/common";
 import { FindManyUserArgs } from "src/@generated/user/find-many-user.args";
 import { User } from "src/graphql.schema";
 import { FindUniqueUserArgs } from "src/@generated/user/find-unique-user.args";
-import { UpdateOneUserArgs } from "src/@generated/user/update-one-user.args";
 import { DeleteOneUserArgs } from "src/@generated/user/delete-one-user.args";
 import { GqlAuthGuard } from "src/common/guards/gql-auth.guard";
 import { Roles } from "src/common/decorators/roles.decorator";
 import Role from "src/common/role/roles.enum";
 import { RolesGuard } from "src/common/guards/roles.guard";
 import { JwtAuthGuard } from "src/common/guards/jwt-auth.guard";
+import { Prisma } from "@prisma/client";
 
 @Resolver("User")
 @UseGuards(GqlAuthGuard)
@@ -35,7 +35,7 @@ export class UsersResolver {
   }
 
   @Mutation("updateUser")
-  async update(@Args() args: UpdateOneUserArgs) {
+  async update(@Args() args: Prisma.UserUpdateArgs) {
     return await this.usersService.update(args);
   }
 

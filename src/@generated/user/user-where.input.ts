@@ -4,6 +4,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableListFilter } from '../prisma/string-nullable-list-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { ErrandRelationFilter } from '../errand/errand-relation-filter.input';
+import { ClientRelationFilter } from '../client/client-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -55,4 +57,10 @@ export class UserWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
+
+    @Field(() => ErrandRelationFilter, {nullable:true})
+    errand?: ErrandRelationFilter;
+
+    @Field(() => ClientRelationFilter, {nullable:true})
+    client?: ClientRelationFilter;
 }
