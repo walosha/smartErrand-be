@@ -3,7 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { ServiceReviewUncheckedUpdateOneWithoutServiceInput } from '../service-review/service-review-unchecked-update-one-without-service.input';
+import { ServiceReviewUncheckedUpdateOneWithoutServiceNestedInput } from '../service-review/service-review-unchecked-update-one-without-service-nested.input';
 
 @InputType()
 export class ServiceUncheckedUpdateWithoutErrandInput {
@@ -26,6 +26,6 @@ export class ServiceUncheckedUpdateWithoutErrandInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     endTime?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ServiceReviewUncheckedUpdateOneWithoutServiceInput, {nullable:true})
-    serviceReview?: ServiceReviewUncheckedUpdateOneWithoutServiceInput;
+    @Field(() => ServiceReviewUncheckedUpdateOneWithoutServiceNestedInput, {nullable:true})
+    serviceReview?: ServiceReviewUncheckedUpdateOneWithoutServiceNestedInput;
 }

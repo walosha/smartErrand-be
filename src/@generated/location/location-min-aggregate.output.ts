@@ -8,8 +8,17 @@ export class LocationMinAggregate {
     id?: string;
 
     @Field(() => String, {nullable:true})
-    location?: string;
+    latitude?: string;
+
+    @Field(() => String, {nullable:true})
+    longitude?: string;
 
     @Field(() => String, {nullable:true})
     address?: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

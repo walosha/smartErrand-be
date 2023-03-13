@@ -1,8 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
-import { ServiceRelationFilter } from '../service/service-relation-filter.input';
 import { EnumRATINGFilter } from '../prisma/enum-rating-filter.input';
+import { ServiceRelationFilter } from '../service/service-relation-filter.input';
 
 @InputType()
 export class ServiceReviewWhereInput {
@@ -22,9 +22,6 @@ export class ServiceReviewWhereInput {
     @Field(() => StringFilter, {nullable:true})
     User?: StringFilter;
 
-    @Field(() => ServiceRelationFilter, {nullable:true})
-    service?: ServiceRelationFilter;
-
     @Field(() => StringFilter, {nullable:true})
     serviceId?: StringFilter;
 
@@ -36,4 +33,7 @@ export class ServiceReviewWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     Photos?: StringFilter;
+
+    @Field(() => ServiceRelationFilter, {nullable:true})
+    service?: ServiceRelationFilter;
 }

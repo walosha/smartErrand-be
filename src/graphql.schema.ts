@@ -34,6 +34,9 @@ export class CreateUserInput {
 
 export class CreateLocationInput {
     address?: Nullable<string>;
+    coords?: Nullable<string>;
+    latitude?: Nullable<string>;
+    longitude?: Nullable<string>;
 }
 
 export class UpdateLocationInput {
@@ -148,6 +151,10 @@ export abstract class IMutation {
 
 export class Location {
     id?: Nullable<string>;
+    address?: Nullable<string>;
+    coords?: Nullable<string>;
+    latitude?: Nullable<string>;
+    longitude?: Nullable<string>;
 }
 
 export abstract class IQuery {

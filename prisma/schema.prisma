@@ -2,15 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider   = "postgresql"
-  url        = env("DATABASE_URL")
-  extensions = [pg_trgm, postgis(version: "2.1")]
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  binaryTargets   = "native"
-  previewFeatures = ["postgresqlExtensions"]
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
 
   // binaryTargets = ["native", "darwin", "linux-musl", "debian-openssl-1.1.x"]
 }
@@ -57,11 +55,13 @@ model Location {
   id        String                               @id @default(uuid())
   // the geometry column itself
   coords    Unsupported("geometry(Point, 4326)")
+  latitude  String
+  longitude String
   address   String?
   errand    Errand?
   client    Client?
   createdAt DateTime                             @default(now())
-  updatedAt DateTime                             @updatedAt
+  updatedAt DateTime                             @default(now())
 
   // the index for that column
   @@index([coords], name: "location_idx", type: Gist)

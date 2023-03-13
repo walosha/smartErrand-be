@@ -1,8 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
-import { UserUpdateOneRequiredWithoutClientInput } from '../user/user-update-one-required-without-client.input';
-import { LocationUpdateOneRequiredWithoutClientInput } from '../location/location-update-one-required-without-client.input';
+import { UserUpdateOneRequiredWithoutClientNestedInput } from '../user/user-update-one-required-without-client-nested.input';
+import { LocationUpdateOneRequiredWithoutClientNestedInput } from '../location/location-update-one-required-without-client-nested.input';
 
 @InputType()
 export class ClientUpdateWithoutCategoriesInput {
@@ -13,9 +13,9 @@ export class ClientUpdateWithoutCategoriesInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => UserUpdateOneRequiredWithoutClientInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutClientInput;
+    @Field(() => UserUpdateOneRequiredWithoutClientNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutClientNestedInput;
 
-    @Field(() => LocationUpdateOneRequiredWithoutClientInput, {nullable:true})
-    location?: LocationUpdateOneRequiredWithoutClientInput;
+    @Field(() => LocationUpdateOneRequiredWithoutClientNestedInput, {nullable:true})
+    location?: LocationUpdateOneRequiredWithoutClientNestedInput;
 }

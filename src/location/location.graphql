@@ -1,9 +1,16 @@
 type Location {
   id: String
+  address: String
+  coords: String
+  latitude: String
+  longitude: String
 }
 
 input CreateLocationInput {
   address: String
+  coords: String
+  latitude: String
+  longitude: String
 }
 
 input UpdateLocationInput {

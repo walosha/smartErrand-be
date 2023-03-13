@@ -23,17 +23,17 @@ export class ClientWhereInput {
     @Field(() => StringFilter, {nullable:true})
     name?: StringFilter;
 
-    @Field(() => UserRelationFilter, {nullable:true})
-    user?: UserRelationFilter;
-
     @Field(() => StringFilter, {nullable:true})
     userId?: StringFilter;
 
-    @Field(() => LocationRelationFilter, {nullable:true})
-    location?: LocationRelationFilter;
-
     @Field(() => StringFilter, {nullable:true})
     locationId?: StringFilter;
+
+    @Field(() => UserRelationFilter, {nullable:true})
+    user?: UserRelationFilter;
+
+    @Field(() => LocationRelationFilter, {nullable:true})
+    location?: LocationRelationFilter;
 
     @Field(() => ServiceListRelationFilter, {nullable:true})
     categories?: ServiceListRelationFilter;

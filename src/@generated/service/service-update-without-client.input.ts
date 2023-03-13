@@ -1,19 +1,16 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
-import { ErrandUpdateOneRequiredWithoutCategoriesInput } from '../errand/errand-update-one-required-without-categories.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { ServiceReviewUpdateOneWithoutServiceInput } from '../service-review/service-review-update-one-without-service.input';
+import { ErrandUpdateOneRequiredWithoutCategoriesNestedInput } from '../errand/errand-update-one-required-without-categories-nested.input';
+import { ServiceReviewUpdateOneWithoutServiceNestedInput } from '../service-review/service-review-update-one-without-service-nested.input';
 
 @InputType()
 export class ServiceUpdateWithoutClientInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     id?: StringFieldUpdateOperationsInput;
-
-    @Field(() => ErrandUpdateOneRequiredWithoutCategoriesInput, {nullable:true})
-    errand?: ErrandUpdateOneRequiredWithoutCategoriesInput;
 
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     startLocation?: FloatFieldUpdateOperationsInput;
@@ -27,6 +24,9 @@ export class ServiceUpdateWithoutClientInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     endTime?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ServiceReviewUpdateOneWithoutServiceInput, {nullable:true})
-    serviceReview?: ServiceReviewUpdateOneWithoutServiceInput;
+    @Field(() => ErrandUpdateOneRequiredWithoutCategoriesNestedInput, {nullable:true})
+    errand?: ErrandUpdateOneRequiredWithoutCategoriesNestedInput;
+
+    @Field(() => ServiceReviewUpdateOneWithoutServiceNestedInput, {nullable:true})
+    serviceReview?: ServiceReviewUpdateOneWithoutServiceNestedInput;
 }

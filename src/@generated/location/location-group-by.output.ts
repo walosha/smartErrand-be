@@ -11,10 +11,19 @@ export class LocationGroupBy {
     id!: string;
 
     @Field(() => String, {nullable:false})
-    location!: string;
+    latitude!: string;
+
+    @Field(() => String, {nullable:false})
+    longitude!: string;
 
     @Field(() => String, {nullable:true})
     address?: string;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
 
     @Field(() => LocationCountAggregate, {nullable:true})
     _count?: LocationCountAggregate;

@@ -2,7 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
-import { ErrandUncheckedUpdateOneWithoutLocationInput } from '../errand/errand-unchecked-update-one-without-location.input';
+import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { ErrandUncheckedUpdateOneWithoutLocationNestedInput } from '../errand/errand-unchecked-update-one-without-location-nested.input';
 
 @InputType()
 export class LocationUncheckedUpdateWithoutClientInput {
@@ -11,11 +12,20 @@ export class LocationUncheckedUpdateWithoutClientInput {
     id?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    location?: StringFieldUpdateOperationsInput;
+    latitude?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    longitude?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     address?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => ErrandUncheckedUpdateOneWithoutLocationInput, {nullable:true})
-    errand?: ErrandUncheckedUpdateOneWithoutLocationInput;
+    @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
+    createdAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
+    updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => ErrandUncheckedUpdateOneWithoutLocationNestedInput, {nullable:true})
+    errand?: ErrandUncheckedUpdateOneWithoutLocationNestedInput;
 }

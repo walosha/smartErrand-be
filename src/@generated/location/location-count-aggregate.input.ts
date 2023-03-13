@@ -8,10 +8,19 @@ export class LocationCountAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
-    location?: true;
+    latitude?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    longitude?: true;
 
     @Field(() => Boolean, {nullable:true})
     address?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
     _all?: true;

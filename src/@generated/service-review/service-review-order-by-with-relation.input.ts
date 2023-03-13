@@ -12,9 +12,6 @@ export class ServiceReviewOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     User?: keyof typeof SortOrder;
 
-    @Field(() => ServiceOrderByWithRelationInput, {nullable:true})
-    service?: ServiceOrderByWithRelationInput;
-
     @Field(() => SortOrder, {nullable:true})
     serviceId?: keyof typeof SortOrder;
 
@@ -26,4 +23,7 @@ export class ServiceReviewOrderByWithRelationInput {
 
     @Field(() => SortOrder, {nullable:true})
     Photos?: keyof typeof SortOrder;
+
+    @Field(() => ServiceOrderByWithRelationInput, {nullable:true})
+    service?: ServiceOrderByWithRelationInput;
 }

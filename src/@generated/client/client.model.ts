@@ -15,17 +15,17 @@ export class Client {
     @Field(() => String, {nullable:false})
     name!: string;
 
-    @Field(() => User, {nullable:false})
-    user?: User;
-
     @Field(() => String, {nullable:false})
     userId!: string;
 
-    @Field(() => Location, {nullable:false})
-    location?: Location;
-
     @Field(() => String, {nullable:false})
     locationId!: string;
+
+    @Field(() => User, {nullable:false})
+    user?: User;
+
+    @Field(() => Location, {nullable:false})
+    location?: Location;
 
     @Field(() => [Service], {nullable:true})
     categories?: Array<Service>;

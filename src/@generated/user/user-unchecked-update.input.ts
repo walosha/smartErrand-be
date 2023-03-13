@@ -4,8 +4,8 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { UserUpdateroleInput } from './user-updaterole.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { ErrandUncheckedUpdateOneWithoutUserInput } from '../errand/errand-unchecked-update-one-without-user.input';
-import { ClientUncheckedUpdateOneWithoutUserInput } from '../client/client-unchecked-update-one-without-user.input';
+import { ErrandUncheckedUpdateOneWithoutUserNestedInput } from '../errand/errand-unchecked-update-one-without-user-nested.input';
+import { ClientUncheckedUpdateOneWithoutUserNestedInput } from '../client/client-unchecked-update-one-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -49,9 +49,9 @@ export class UserUncheckedUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ErrandUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    errand?: ErrandUncheckedUpdateOneWithoutUserInput;
+    @Field(() => ErrandUncheckedUpdateOneWithoutUserNestedInput, {nullable:true})
+    errand?: ErrandUncheckedUpdateOneWithoutUserNestedInput;
 
-    @Field(() => ClientUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    client?: ClientUncheckedUpdateOneWithoutUserInput;
+    @Field(() => ClientUncheckedUpdateOneWithoutUserNestedInput, {nullable:true})
+    client?: ClientUncheckedUpdateOneWithoutUserNestedInput;
 }

@@ -14,17 +14,17 @@ export class ClientOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     name?: keyof typeof SortOrder;
 
-    @Field(() => UserOrderByWithRelationInput, {nullable:true})
-    user?: UserOrderByWithRelationInput;
-
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
 
-    @Field(() => LocationOrderByWithRelationInput, {nullable:true})
-    location?: LocationOrderByWithRelationInput;
-
     @Field(() => SortOrder, {nullable:true})
     locationId?: keyof typeof SortOrder;
+
+    @Field(() => UserOrderByWithRelationInput, {nullable:true})
+    user?: UserOrderByWithRelationInput;
+
+    @Field(() => LocationOrderByWithRelationInput, {nullable:true})
+    location?: LocationOrderByWithRelationInput;
 
     @Field(() => ServiceOrderByRelationAggregateInput, {nullable:true})
     categories?: ServiceOrderByRelationAggregateInput;

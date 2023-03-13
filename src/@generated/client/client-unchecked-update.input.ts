@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
-import { ServiceUncheckedUpdateManyWithoutClientInput } from '../service/service-unchecked-update-many-without-client.input';
+import { ServiceUncheckedUpdateManyWithoutClientNestedInput } from '../service/service-unchecked-update-many-without-client-nested.input';
 
 @InputType()
 export class ClientUncheckedUpdateInput {
@@ -18,6 +18,6 @@ export class ClientUncheckedUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     locationId?: StringFieldUpdateOperationsInput;
 
-    @Field(() => ServiceUncheckedUpdateManyWithoutClientInput, {nullable:true})
-    categories?: ServiceUncheckedUpdateManyWithoutClientInput;
+    @Field(() => ServiceUncheckedUpdateManyWithoutClientNestedInput, {nullable:true})
+    categories?: ServiceUncheckedUpdateManyWithoutClientNestedInput;
 }

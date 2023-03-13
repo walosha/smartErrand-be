@@ -2,8 +2,11 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum LocationScalarFieldEnum {
     id = "id",
-    location = "location",
-    address = "address"
+    latitude = "latitude",
+    longitude = "longitude",
+    address = "address",
+    createdAt = "createdAt",
+    updatedAt = "updatedAt"
 }
 
 

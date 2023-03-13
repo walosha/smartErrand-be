@@ -11,10 +11,19 @@ export class Location {
     id!: string;
 
     @Field(() => String, {nullable:false})
-    location!: string;
+    latitude!: string;
+
+    @Field(() => String, {nullable:false})
+    longitude!: string;
 
     @Field(() => String, {nullable:true})
     address!: string | null;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
 
     @Field(() => Errand, {nullable:true})
     errand?: Errand | null;

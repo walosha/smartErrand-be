@@ -11,14 +11,8 @@ export class ServiceOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     id?: keyof typeof SortOrder;
 
-    @Field(() => ErrandOrderByWithRelationInput, {nullable:true})
-    errand?: ErrandOrderByWithRelationInput;
-
     @Field(() => SortOrder, {nullable:true})
     errandId?: keyof typeof SortOrder;
-
-    @Field(() => ClientOrderByWithRelationInput, {nullable:true})
-    client?: ClientOrderByWithRelationInput;
 
     @Field(() => SortOrder, {nullable:true})
     clientId?: keyof typeof SortOrder;
@@ -34,6 +28,12 @@ export class ServiceOrderByWithRelationInput {
 
     @Field(() => SortOrder, {nullable:true})
     endTime?: keyof typeof SortOrder;
+
+    @Field(() => ErrandOrderByWithRelationInput, {nullable:true})
+    errand?: ErrandOrderByWithRelationInput;
+
+    @Field(() => ClientOrderByWithRelationInput, {nullable:true})
+    client?: ClientOrderByWithRelationInput;
 
     @Field(() => ServiceReviewOrderByWithRelationInput, {nullable:true})
     serviceReview?: ServiceReviewOrderByWithRelationInput;

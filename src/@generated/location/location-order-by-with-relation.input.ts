@@ -11,10 +11,19 @@ export class LocationOrderByWithRelationInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    location?: keyof typeof SortOrder;
+    latitude?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    longitude?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     address?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
 
     @Field(() => ErrandOrderByWithRelationInput, {nullable:true})
     errand?: ErrandOrderByWithRelationInput;

@@ -4,8 +4,8 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { UserUpdateroleInput } from './user-updaterole.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { ErrandUpdateOneWithoutUserInput } from '../errand/errand-update-one-without-user.input';
-import { ClientUpdateOneWithoutUserInput } from '../client/client-update-one-without-user.input';
+import { ErrandUpdateOneWithoutUserNestedInput } from '../errand/errand-update-one-without-user-nested.input';
+import { ClientUpdateOneWithoutUserNestedInput } from '../client/client-update-one-without-user-nested.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -49,9 +49,9 @@ export class UserUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ErrandUpdateOneWithoutUserInput, {nullable:true})
-    errand?: ErrandUpdateOneWithoutUserInput;
+    @Field(() => ErrandUpdateOneWithoutUserNestedInput, {nullable:true})
+    errand?: ErrandUpdateOneWithoutUserNestedInput;
 
-    @Field(() => ClientUpdateOneWithoutUserInput, {nullable:true})
-    client?: ClientUpdateOneWithoutUserInput;
+    @Field(() => ClientUpdateOneWithoutUserNestedInput, {nullable:true})
+    client?: ClientUpdateOneWithoutUserNestedInput;
 }
