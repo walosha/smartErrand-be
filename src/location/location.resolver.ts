@@ -22,10 +22,7 @@ export class LocationResolver {
 
   @Mutation("updateLocation")
   update(@Args("updateLocationInput") updateLocationInput: any) {
-    return this.locationService.update(
-      updateLocationInput.id,
-      updateLocationInput
-    );
+    return this.locationService.update(updateLocationInput.id);
   }
 
   @Mutation("removeLocation")
