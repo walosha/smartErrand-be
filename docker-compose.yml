@@ -13,8 +13,7 @@ services:
   #   depends_on:
   #     - node_db
   node_db:
-    # image: postgis/postgis
-    build: .
+    image: postgis/postgis
     ports:
       - "5432:5432"
     volumes:
