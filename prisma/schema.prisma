@@ -52,16 +52,17 @@ model User {
 }
 
 model Location {
-  id        String                               @id @default(uuid())
+  id            String                               @id @default(uuid())
   // the geometry column itself
-  coords    Unsupported("geometry(Point, 4326)")
-  latitude  String
-  longitude String
-  address   String?
-  errand    Errand?
-  client    Client?
-  createdAt DateTime                             @default(now())
-  updatedAt DateTime                             @default(now())
+  coords        Unsupported("geometry(Point, 4326)")
+  latitude      String
+  longitude     String
+  address       String?
+  locationindex String
+  errand        Errand?
+  client        Client?
+  createdAt     DateTime                             @default(now())
+  updatedAt     DateTime                             @default(now())
 
   // the index for that column
   @@index([coords], name: "location_idx", type: Gist)

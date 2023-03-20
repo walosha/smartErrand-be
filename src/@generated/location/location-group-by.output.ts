@@ -19,6 +19,9 @@ export class LocationGroupBy {
     @Field(() => String, {nullable:true})
     address?: string;
 
+    @Field(() => String, {nullable:false})
+    locationindex!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

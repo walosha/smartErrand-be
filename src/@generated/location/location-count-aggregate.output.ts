@@ -18,6 +18,9 @@ export class LocationCountAggregate {
     address!: number;
 
     @Field(() => Int, {nullable:false})
+    locationindex!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

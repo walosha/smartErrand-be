@@ -5,6 +5,7 @@ export enum LocationScalarFieldEnum {
     latitude = "latitude",
     longitude = "longitude",
     address = "address",
+    locationindex = "locationindex",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

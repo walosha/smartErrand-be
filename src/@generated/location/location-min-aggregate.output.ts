@@ -16,6 +16,9 @@ export class LocationMinAggregate {
     @Field(() => String, {nullable:true})
     address?: string;
 
+    @Field(() => String, {nullable:true})
+    locationindex?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

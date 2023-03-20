@@ -21,6 +21,9 @@ export class LocationOrderByWithAggregationInput {
     address?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    locationindex?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

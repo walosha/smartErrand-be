@@ -30,6 +30,9 @@ export class LocationWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     address?: StringNullableFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    locationindex?: StringFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 

@@ -19,6 +19,9 @@ export class Location {
     @Field(() => String, {nullable:true})
     address!: string | null;
 
+    @Field(() => String, {nullable:false})
+    locationindex!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

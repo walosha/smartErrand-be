@@ -17,6 +17,9 @@ export class LocationMinAggregateInput {
     address?: true;
 
     @Field(() => Boolean, {nullable:true})
+    locationindex?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

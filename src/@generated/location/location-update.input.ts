@@ -21,6 +21,9 @@ export class LocationUpdateInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     address?: NullableStringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    locationindex?: StringFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
